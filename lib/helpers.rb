@@ -1,3 +1,5 @@
+require 'optparse'
+
 module Helpers
   attr_accessor :options
 
@@ -36,6 +38,19 @@ module Helpers
   	puts(text) if force || @options[:verbose]
   end
 
-
+  def traverse(obj, parents=[], leaf=false, &blk)
+    case obj
+    when Hash
+      obj.each do |k, v| 
+        blk.call(k, parents, false)
+        # Pass hash key as parent
+        traverse(v, k, false, &blk) 
+      end
+    when Array
+      obj.each {|v| traverse(v, parents, true, &blk) }
+    else
+      blk.call(obj, parent, true)
+    end
+  end
 
 end
