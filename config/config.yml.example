@@ -1,0 +1,7 @@
+---
+swift:
+  url: http://<openstack-auth-url>/v2.0/tokens
+  user: <user>
+  password: <password>
+  tenant: <tenant>
+artifacts_url: 'http://cf-compiled-packages.s3-website-us-east-1.amazonaws.com'
